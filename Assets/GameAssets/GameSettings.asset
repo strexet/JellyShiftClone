@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a4e578fd11445da55ffbf4ba822217, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  PlayerPhysicalSpeed: 7
+  CubeCastDistance: 10
+  MaxInputOffset: 300
+  CubeDepth: 0.575
+  MinCubeDimension: 0.35
+  MaxCubeDimension: 2.05
+  CollisionForceBack: 200
+  CollisionForceUp: 75
+  CollisionStopDuration: 0.55
+  ObstacleLayerIndex: 10
+  PlayerDistanceThreshold: 5
+  MaxStreakCount: 5
+  BreakthroughDuration: 7.5
+  LevelPrefix: level_
+  LevelsCount: 2
+  NormalBackgroundColor: {r: 0.972549, g: 0.827451, b: 1, a: 0}
+  BreakthroughBackgroundColor: {r: 0.5018295, g: 0.9245283, b: 0.48406905, a: 1}
