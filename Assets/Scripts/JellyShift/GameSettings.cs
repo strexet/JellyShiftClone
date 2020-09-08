@@ -8,6 +8,8 @@ namespace JellyShift
         [Header("Player")]
         public float PlayerPhysicalSpeed = 5f;
         public float CubeCastDistance = 30;
+        public int NormalPlayerLayerIndex = 5;
+        public int CollidedPlayerLayerIndex = 8;
 
         [Header("Input")]
         public float MaxInputOffset = 300;

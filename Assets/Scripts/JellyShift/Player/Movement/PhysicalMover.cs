@@ -8,14 +8,17 @@ namespace JellyShift.Player.Movement
         [SerializeField] private GameSettings _gameSettings;
 
         private Transform _transform;
+        private GameObject _gameObject;
 
         private void Awake()
         {
             _transform = transform;
+            _gameObject = gameObject;
         }
 
         public void Init()
         {
+            _gameObject.layer = _gameSettings.NormalPlayerLayerIndex;
             _rigidbody.isKinematic = false;
             _rigidbody.useGravity = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;

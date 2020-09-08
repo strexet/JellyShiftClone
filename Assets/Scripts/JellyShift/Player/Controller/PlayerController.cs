@@ -40,8 +40,6 @@ namespace JellyShift.Player.Controller
                 _currentState.ResetState();
             }
 
-            Debug.Log($"PlayerController.OnStateChanged> PLAYER: {_currentState?.GetType().Name} --> {newState.GetType().Name}");
-
             newState.StateChanged += OnStateChanged;
             newState.PrepareState();
 

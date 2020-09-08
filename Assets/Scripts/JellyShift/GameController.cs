@@ -60,8 +60,6 @@ namespace JellyShift
                 _currentState.ResetState();
             }
 
-            Debug.Log($"GameController.OnStateChanged> GAME: {_currentState?.GetType().Name} --> {newState.GetType().Name}");
-
             newState.StateChanged += OnStateChanged;
             newState.PrepareState();
 

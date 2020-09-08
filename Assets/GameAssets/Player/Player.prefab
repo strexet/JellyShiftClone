@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9014d54b178945f286375185b4134e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameSettings: {fileID: 11400000, guid: a04ad22840e873f488ec05affff48162, type: 2}
   _rigidbody: {fileID: 8801813087414251034}
   _endOfPathInstruction: 2
 --- !u!1 &8801813086960367109
@@ -411,19 +412,9 @@ MonoBehaviour:
   _pathMover: {fileID: 8801813085954733269}
   _gameSettings: {fileID: 11400000, guid: a04ad22840e873f488ec05affff48162, type: 2}
   _finishLevelZone: {fileID: 0}
-  _loseLevelZones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _startTransitionZones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _finishTransitionZones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _loseLevelZones: []
+  _startTransitionZones: []
+  _finishTransitionZones: []
 --- !u!114 &8801813087414251035
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a28ce871294434c8b59ea22393985e2, type: 3}
   m_Name: SlowUpdateTimeData
   m_EditorClassIdentifier: 
-  PlayerDistanceCheck: 1
-  CubeCast: 0.2
+  PlayerDistanceCheck: 2
+  CubeCast: 0.1

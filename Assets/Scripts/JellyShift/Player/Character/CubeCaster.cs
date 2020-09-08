@@ -27,13 +27,17 @@ namespace JellyShift.Player.Character
 
         private void Update()
         {
+            TryCastRay();
+            CopyCubeForm();
+        }
+
+        private void CopyCubeForm()
+        {
             if (!_isCasting) return;
 
             _castedViewTransform.localPosition = _jellyCubeTransform.localPosition;
             _castedViewTransform.localRotation = _jellyCubeTransform.localRotation;
             _castedViewTransform.localScale = _jellyCubeTransform.localScale;
-
-            TryCastRay();
         }
 
         private void TryCastRay()

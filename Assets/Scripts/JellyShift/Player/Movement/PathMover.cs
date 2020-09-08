@@ -1,3 +1,4 @@
+using System;
 using PathCreation;
 using UnityEngine;
 
@@ -5,13 +6,20 @@ namespace JellyShift.Player.Movement
 {
     public class PathMover : MonoBehaviour, IMover
     {
+        [SerializeField] private GameSettings _gameSettings;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private EndOfPathInstruction _endOfPathInstruction;
 
+        private GameObject _gameObject;
         private PathCreator _pathCreator;
         private float _pathSpeed;
 
         private float _distanceTravelled;
+
+        private void Awake()
+        {
+            _gameObject = gameObject;
+        }
 
         public void Setup(PathCreator transitionPath, float transitionSpeed)
         {
@@ -21,6 +29,7 @@ namespace JellyShift.Player.Movement
 
         public void Init()
         {
+            _gameObject.layer = _gameSettings.NormalPlayerLayerIndex;
             _rigidbody.isKinematic = true;
             _rigidbody.constraints = RigidbodyConstraints.None;
             MoveToPath();
