@@ -1,7 +1,6 @@
 using JellyShift.Obstacles;
 using JellyShift.Player.Manager;
 using UnityEngine;
-using UsefulTools.Performance;
 
 namespace JellyShift.Optimization
 {
@@ -13,7 +12,8 @@ namespace JellyShift.Optimization
         [SerializeField] private PlayerManager _playerManager;
 
         private Transform _transform;
-        private SlowUpdatedTask _task;
+        private float _nextCheckTime;
+        private bool _isChecking;
 
         private void Awake()
         {
@@ -28,12 +28,28 @@ namespace JellyShift.Optimization
         private void OnDisable()
         {
             _obstacle.PlayerPassed -= OnPassedObstacle;
-            _task?.Destroy();
+        }
+
+        private void FixedUpdate()
+        {
+            TryCheckDistanceToPlayer();
         }
 
         private void OnPassedObstacle()
         {
-            _task = SlowUpdateManager.CreateTask(_timeData.PlayerDistanceCheck, CheckDistanceToPlayer);
+            _isChecking = true;
+        }
+
+        private void TryCheckDistanceToPlayer()
+        {
+            if (!_isChecking) return;
+
+            var currentTime = Time.time;
+
+            if (currentTime < _nextCheckTime) return;
+
+            _nextCheckTime = currentTime + _timeData.PlayerDistanceCheck;
+            CheckDistanceToPlayer();
         }
 
         private void CheckDistanceToPlayer()

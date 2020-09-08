@@ -9865,17 +9865,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _loseLevelZones.Array.data[0]
       value: 
-      objectReference: {fileID: 1565712884}
+      objectReference: {fileID: 721509336}
     - target: {fileID: 8801813087414251032, guid: ecc5cc2d988ae58449569a251e1f2529,
         type: 3}
       propertyPath: _loseLevelZones.Array.data[1]
       value: 
-      objectReference: {fileID: 721509336}
+      objectReference: {fileID: 1526013875}
     - target: {fileID: 8801813087414251032, guid: ecc5cc2d988ae58449569a251e1f2529,
         type: 3}
       propertyPath: _loseLevelZones.Array.data[2]
       value: 
-      objectReference: {fileID: 1526013875}
+      objectReference: {fileID: 1565712884}
     - target: {fileID: 8801813087414251032, guid: ecc5cc2d988ae58449569a251e1f2529,
         type: 3}
       propertyPath: _loseLevelZones.Array.data[3]
@@ -9941,5 +9941,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8801813085930160764, guid: ecc5cc2d988ae58449569a251e1f2529, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecc5cc2d988ae58449569a251e1f2529, type: 3}

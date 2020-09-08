@@ -1,6 +1,5 @@
 using JellyShift.Optimization;
 using UnityEngine;
-using UsefulTools.Performance;
 
 namespace JellyShift.Player.Character
 {
@@ -16,22 +15,14 @@ namespace JellyShift.Player.Character
         [SerializeField] private GameObject _castedCube;
         [SerializeField] private Transform _castedViewTransform;
 
-        private SlowUpdatedTask _task;
-
         private Transform _castedCubeTransform;
+        private float _nextCastTime;
         private bool _isCasting;
 
         private void OnEnable()
         {
             _castedCubeTransform = _castedCube.transform;
             _castedCube.SetActive(false);
-
-            _task = SlowUpdateManager.CreateTask(_timeData.CubeCast, CastRay);
-        }
-
-        private void OnDisable()
-        {
-            _task?.Destroy();
         }
 
         private void Update()
@@ -41,6 +32,18 @@ namespace JellyShift.Player.Character
             _castedViewTransform.localPosition = _jellyCubeTransform.localPosition;
             _castedViewTransform.localRotation = _jellyCubeTransform.localRotation;
             _castedViewTransform.localScale = _jellyCubeTransform.localScale;
+
+            TryCastRay();
+        }
+
+        private void TryCastRay()
+        {
+            var currentTime = Time.time;
+
+            if (currentTime < _nextCastTime) return;
+
+            _nextCastTime = currentTime + _timeData.CubeCast;
+            CastRay();
         }
 
         private void CastRay()
