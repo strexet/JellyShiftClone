@@ -410,11 +410,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pathMover: {fileID: 8801813085954733269}
+  _physicalMover: {fileID: 8801813085954733267}
+  _collisionMover: {fileID: 8801813085954733266}
   _gameSettings: {fileID: 11400000, guid: a04ad22840e873f488ec05affff48162, type: 2}
   _finishLevelZone: {fileID: 0}
-  _loseLevelZones: []
-  _startTransitionZones: []
-  _finishTransitionZones: []
+  _loseLevelZones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _startTransitionZones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _finishTransitionZones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &8801813087414251035
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,10 +9,17 @@ namespace JellyShift.Player.Movement
 
         private GameObject _gameObject;
         private bool _isStarted;
+        private MoveDirection _moveDirection;
 
         private void Awake()
         {
             _gameObject = gameObject;
+            _moveDirection = MoveDirection.X;
+        }
+
+        public void Setup(MoveDirection moveDirectionAfterTransition)
+        {
+            _moveDirection = moveDirectionAfterTransition;
         }
 
         public void Init()
@@ -20,7 +27,21 @@ namespace JellyShift.Player.Movement
             _gameObject.layer = _gameSettings.CollidedPlayerLayerIndex;
             _rigidbody.isKinematic = false;
             _rigidbody.useGravity = true;
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
+            var constraints = RigidbodyConstraints.FreezeRotation;
+
+            switch (_moveDirection)
+            {
+                case MoveDirection.X:
+                    constraints |= RigidbodyConstraints.FreezePositionZ;
+                    break;
+                case MoveDirection.Z:
+                    constraints |= RigidbodyConstraints.FreezePositionX;
+                    break;
+            }
+
+            _rigidbody.constraints = constraints;
+
             _isStarted = false;
         }
 

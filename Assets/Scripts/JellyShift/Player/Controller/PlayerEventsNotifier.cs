@@ -9,6 +9,8 @@ namespace JellyShift.Player.Controller
     public class PlayerEventsNotifier : MonoBehaviour, IPlayerEventsNotifier
     {
         [SerializeField] private PathMover _pathMover;
+        [SerializeField] private PhysicalMover _physicalMover;
+        [SerializeField] private CollisionMover _collisionMover;
 
         [SerializeField] private GameSettings _gameSettings;
         [SerializeField] private FinishLevelZone _finishLevelZone;
@@ -109,6 +111,13 @@ namespace JellyShift.Player.Controller
 
         private void OnEscapedTransitionZone(TriggerZone zone)
         {
+            if (zone is FinishTransitionZone transitionZone)
+            {
+                var moveDirection = transitionZone.MoveDirectionAfterTransition;
+                _physicalMover.Setup(moveDirection);
+                _collisionMover.Setup(moveDirection);
+            }
+
             EscapedTransitionZone.Invoke();
         }
 
