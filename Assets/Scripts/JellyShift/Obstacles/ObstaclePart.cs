@@ -9,9 +9,31 @@ namespace JellyShift.Obstacles
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Obstacle _parentObstacle;
         [SerializeField] private Renderer _renderer;
+        [SerializeField] private CollisionReceiver _collisionReceiver;
 
         private bool _alreadyDynamic;
         private bool _isSwappedMaterials;
+
+        private void OnEnable()
+        {
+            _collisionReceiver.Collided += OnCollision;
+            
+        }
+
+        private void OnDisable()
+        {
+            _collisionReceiver.Collided -= OnCollision;
+        }
+
+        private void OnCollision(GameObject other)
+        {
+            if (_alreadyDynamic) return;
+
+            ReplaceOnDynamic();
+            AddRandomForceAndTorque();
+
+            _parentObstacle.OnChildCollision();
+        }
 
         public void SwapMaterials()
         {
@@ -41,27 +63,6 @@ namespace JellyShift.Obstacles
             AddRandomForceAndTorque();
 
             _rigidbody.AddExplosionForce(_data.ExplosionForceAmplitude, origin, _data.ExplosionRadius);
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (_alreadyDynamic) return;
-
-            NotifyCollisionDetector(collision);
-            ReplaceOnDynamic();
-            AddRandomForceAndTorque();
-
-            _parentObstacle.OnChildCollision();
-        }
-
-        private void NotifyCollisionDetector(Collision collision)
-        {
-            var collisionDetector = collision.gameObject.GetComponent<CollisionDetector>();
-
-            if (collisionDetector != null)
-            {
-                collisionDetector.OnCollision(gameObject);
-            }
         }
 
         private void ReplaceOnDynamic()

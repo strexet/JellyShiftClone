@@ -5,11 +5,25 @@ namespace JellyShift.Game.Physics
 {
     public class CollisionDetector : MonoBehaviour
     {
-        public event Action<GameObject> Collided; 
+        public event Action<GameObject> Collided;
 
-        public void OnCollision(GameObject other)
+        public void OnCollisionEnter(Collision collision)
         {
-            Collided?.Invoke(other);
+            var otherGameObject = collision.gameObject;
+
+            Collided?.Invoke(otherGameObject);
+
+            NotifyCollisionReceiver(otherGameObject);
+        }
+
+        private void NotifyCollisionReceiver(GameObject otherGameObject)
+        {
+            var collisionReceiver = otherGameObject.GetComponent<CollisionReceiver>();
+
+            if (collisionReceiver != null)
+            {
+                collisionReceiver.OnCollisionReceived(gameObject);
+            }
         }
     }
 }
