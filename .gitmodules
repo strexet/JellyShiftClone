@@ -1,6 +1,0 @@
-[submodule "Assets/Submodules/Path-Creator"]
-	path = Assets/Submodules/Path-Creator
-	url = https://github.com/SebLague/Path-Creator.git
-[submodule "Assets/Submodules/UsefulTools"]
-	path = Assets/Submodules/UsefulTools
-	url = https://github.com/strexet/UsefulTools.git

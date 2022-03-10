@@ -1,6 +1,5 @@
 using JellyShift.JellyInput;
 using UnityEngine;
-using UsefulTools.Performance;
 
 namespace JellyShift.Player.Character
 {
@@ -31,7 +30,7 @@ namespace JellyShift.Player.Character
             var maxOffset = _gameSettings.MaxInputOffset;
 
             _currentOffset = Mathf.Clamp(inputOffset + _lastOffset, -maxOffset, maxOffset);
-            var factor = FastMath.Remap(_currentOffset, -maxOffset, maxOffset, 0, 1);
+            var factor = Remap(_currentOffset, -maxOffset, maxOffset, 0, 1);
 
             var minDimension = _gameSettings.MinCubeDimension;
             var maxDimension = _gameSettings.MaxCubeDimension;
@@ -48,6 +47,11 @@ namespace JellyShift.Player.Character
         private void OnInputEnded()
         {
             _lastOffset = _currentOffset;
+        }
+        
+        private static float Remap(float inValue, float inMin, float inMax, float outMin, float outMax)
+        {
+            return outMin + (outMax - outMin) * ((inValue - inMin) / (inMax - inMin));
         }
     }
 }
