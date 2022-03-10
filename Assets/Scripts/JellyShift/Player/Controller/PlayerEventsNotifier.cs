@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JellyShift.Game.Physics;
 using JellyShift.Level.Zones;
 using JellyShift.Player.Movement;
 using UnityEngine;
@@ -8,11 +9,15 @@ namespace JellyShift.Player.Controller
 {
     public class PlayerEventsNotifier : MonoBehaviour, IPlayerEventsNotifier
     {
+        [SerializeField] private GameSettings _gameSettings;
+        [SerializeField] private CollisionDetector _collisionDetector;
+
+        [Header("Movers")]
         [SerializeField] private PathMover _pathMover;
         [SerializeField] private PhysicalMover _physicalMover;
         [SerializeField] private CollisionMover _collisionMover;
 
-        [SerializeField] private GameSettings _gameSettings;
+        [Header("Zones")]
         [SerializeField] private FinishLevelZone _finishLevelZone;
         [SerializeField] private List<LoseLevelZone> _loseLevelZones;
         [SerializeField] private List<StartTransitionZone> _startTransitionZones;
@@ -29,6 +34,8 @@ namespace JellyShift.Player.Controller
 
         private void OnEnable()
         {
+            _collisionDetector.Collided += OnCollision;
+            
             _finishLevelZone.EnteredZone += OnEnteredFinishZone;
 
             foreach (var loseLevelZone in _loseLevelZones)
@@ -49,6 +56,8 @@ namespace JellyShift.Player.Controller
 
         private void OnDisable()
         {
+            _collisionDetector.Collided -= OnCollision;
+            
             _finishLevelZone.EnteredZone -= OnEnteredFinishZone;
 
             foreach (var loseLevelZone in _loseLevelZones)
@@ -67,9 +76,9 @@ namespace JellyShift.Player.Controller
             }
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollision(GameObject other)
         {
-            if (other.gameObject.layer != _gameSettings.ObstacleLayerIndex
+            if (other.layer != _gameSettings.ObstacleLayerIndex
                 || _isColliding)
             {
                 return;

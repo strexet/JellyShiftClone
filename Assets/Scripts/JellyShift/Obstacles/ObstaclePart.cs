@@ -1,3 +1,4 @@
+using JellyShift.Game.Physics;
 using UnityEngine;
 
 namespace JellyShift.Obstacles
@@ -42,14 +43,25 @@ namespace JellyShift.Obstacles
             _rigidbody.AddExplosionForce(_data.ExplosionForceAmplitude, origin, _data.ExplosionRadius);
         }
 
-        private void OnCollisionEnter()
+        private void OnCollisionEnter(Collision collision)
         {
             if (_alreadyDynamic) return;
 
+            NotifyCollisionDetector(collision);
             ReplaceOnDynamic();
             AddRandomForceAndTorque();
 
             _parentObstacle.OnChildCollision();
+        }
+
+        private void NotifyCollisionDetector(Collision collision)
+        {
+            var collisionDetector = collision.gameObject.GetComponent<CollisionDetector>();
+
+            if (collisionDetector != null)
+            {
+                collisionDetector.OnCollision(gameObject);
+            }
         }
 
         private void ReplaceOnDynamic()
